@@ -1,0 +1,79 @@
+@endpoint = https://aics-linkedin-course.cognitiveservices.azure.com/
+@subscription-key = 81eEBmFc5QphAGIdYmKpygwcn6jgt3s1G11seS4ftUX1vpfMrHpdJQQJ99BDACYeBjFXJ3w3AAAHACOGbTLC
+
+
+
+
+
+
+
+
+
+
+### Analyze Text
+POST {{endpoint}}/contentsafety/text:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "text": "I really hate those people!"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Analyze Text with options
+POST {{endpoint}}/contentsafety/text:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "text": "I have suicidal thoughts",
+  "categories": [
+    "SelfHarm"
+  ],
+  "outputType": "EightSeverityLevels" 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Custom Category Analysis
+POST {{endpoint}}/contentsafety/text:analyzeCustomCategory?api-version=2024-09-15-preview
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "text": "I really hate you",
+  "categoryName" : "myBlocklist",
+  "version": 2
+}

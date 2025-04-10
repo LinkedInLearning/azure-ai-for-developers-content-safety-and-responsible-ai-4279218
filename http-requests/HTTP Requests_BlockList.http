@@ -1,0 +1,63 @@
+@endpoint = https://aics-linkedin-course.cognitiveservices.azure.com/
+@subscription-key = 81eEBmFc5QphAGIdYmKpygwcn6jgt3s1G11seS4ftUX1vpfMrHpdJQQJ99BDACYeBjFXJ3w3AAAHACOGbTLC
+
+@blocklistName = myBlocklist
+
+### Create or Update Blocklist
+PATCH {{endpoint}}/contentsafety/text/blocklists/{{blocklistName}}?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "description": "A demo blocklist"
+}
+
+### Delete a Blocklist
+DELETE {{endpoint}}/contentsafety/text/blocklists/{{blocklistName}}?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+
+### Add Terms to Blocklist
+POST {{endpoint}}/contentsafety/text/blocklists/{{blocklistName}}:addOrUpdateBlocklistItems?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "blocklistItems": [
+    {
+      "description": "Competitors",
+      "text": "Company XYZ"
+    },
+    {
+      "description": "A regular expression to block email addresses",
+      "text": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
+      "isRegex": true
+    }
+  ]
+}
+
+### Test the Blocklist
+### Analyze Text
+POST {{endpoint}}/contentsafety/text:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "text": "I really dislike company XYZ",
+  "blocklistNames": [
+    "{{blocklistName}}"
+  ]
+}
+
+### Test the Blocklist
+### Analyze Text
+POST {{endpoint}}/contentsafety/text:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "text": "my e-mail is john.doe@company.url",
+  "blocklistNames": [
+    "{{blocklistName}}"
+  ]
+}
+
+### Get all Blocklists
+GET {{endpoint}}/contentsafety/text/blocklists?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
