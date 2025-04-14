@@ -1,0 +1,72 @@
+@endpoint = https://aics-linkedin-course.cognitiveservices.azure.com/
+@subscription-key = 81eEBmFc5QphAGIdYmKpygwcn6jgt3s1G11seS4ftUX1vpfMrHpdJQQJ99BDACYeBjFXJ3w3AAAHACOGbTLC
+@url = https://familydoctor.org/wp-content/uploads/2016/11/shutterstock_343217441-848x566.jpg
+
+
+
+
+
+
+
+
+
+
+
+### Analyze Image with URL
+POST {{endpoint}}/contentsafety/image:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "image": {
+    "blobUrl": "{{url}}"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Analyze Image with Base64 Encoding
+POST {{endpoint}}/contentsafety/image:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "image": {
+    "content": "SGlkZGVuIG1lc3NhZ2UgYnkgdGhlIHR1dG9yLCBlbWFpbCBtZSBvbiBzYW1teUBkYXRhc2F2YW5uYS5jby5rZSBpZiB5b3UgZm91bmQgdGhpcyE="
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Analyze Image with options
+POST {{endpoint}}/contentsafety/image:analyze?api-version=2024-09-01
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "image": {
+    "blobUrl": "{{url}}"
+  },
+  "categories": [
+    "SelfHarm"
+  ]
+}

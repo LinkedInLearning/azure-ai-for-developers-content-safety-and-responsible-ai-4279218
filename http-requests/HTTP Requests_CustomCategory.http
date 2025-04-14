@@ -1,0 +1,28 @@
+@endpoint = https://aics-linkedin-course.cognitiveservices.azure.com/
+@subscription-key = 81eEBmFc5QphAGIdYmKpygwcn6jgt3s1G11seS4ftUX1vpfMrHpdJQQJ99BDACYeBjFXJ3w3AAAHACOGbTLC
+
+@customCategory = myBlocklist
+
+### Create or Update Custom Category
+PUT {{endpoint}}/contentsafety/text/categories/{{customCategory}}?api-version=2024-09-15-preview
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+{
+  "categoryName": "{{customCategory}}",
+  "definition":"text prompts about survival advice in camping/wilderness situations",
+  "sampleBlobUrl": "https://slinkedincourse.blob.core.windows.net/data/survival-advice.jsonl"
+}
+
+
+# Version is returned in the create response
+@version = 2
+### Start Building Custom Category
+POST {{endpoint}}/contentsafety/text/categories/{{customCategory}}:build?api-version=2024-09-15-preview&version={{version}}
+Ocp-Apim-Subscription-Key: {{subscription-key}}
+
+
+# Run ID is returned in the build response
+@run_id = 8c54e6fa-2836-492e-93ce-1fabe92ef728
+### Get Custom Category Build Status
+GET {{endpoint}}/contentsafety/text/categories/operations/{{run_id}}?api-version=2024-09-15-preview
+Ocp-Apim-Subscription-Key: {{subscription-key}}
